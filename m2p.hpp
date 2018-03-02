@@ -13,7 +13,7 @@
 #define bmask 0x0000ff00
 #define amask 0x000000ff
 
-class m2p
+class matrix2pixel
 {
 	private:
 	
@@ -43,8 +43,8 @@ class m2p
 		
 	public:
 	
-		m2p();
-		~m2p();
+		matrix2pixel();
+		~matrix2pixel();
 		
 		void setPersistence(){persistence = true;}
 		void unsetPersistence(){persistence = true;}
@@ -65,7 +65,7 @@ class m2p
 	
 };
 
-m2p::~m2p()
+matrix2pixel::~matrix2pixel()
 {
 	SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);
@@ -73,7 +73,7 @@ m2p::~m2p()
     SDL_Quit();
 }
 
-m2p::m2p()
+matrix2pixel::matrix2pixel()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
@@ -90,7 +90,7 @@ m2p::m2p()
 }
 
 template<typename colorStyle, typename inputMatrixType>
-void m2p::drawMatrix(inputMatrixType inputMatrix, int w,int h,double scale)
+void matrix2pixel::drawMatrix(inputMatrixType inputMatrix, int w,int h,double scale)
 {
 	int i,j;
 	
@@ -176,7 +176,7 @@ struct pp2data{
 };
 
 template<typename colorStyle, typename inputMatrixType>
-void m2p::drawMatrix(inputMatrixType** inputMatrix, int w,int h,double scale){
+void matrix2pixel::drawMatrix(inputMatrixType** inputMatrix, int w,int h,double scale){
 	drawMatrix<colorStyle,pp2data<inputMatrixType>>(pp2data<inputMatrixType>{inputMatrix},w,h,scale);
 }
 
@@ -191,7 +191,7 @@ struct p2data{ //Row-major order
 };
 
 template<typename colorStyle, typename inputMatrixType>
-void m2p::drawMatrix(inputMatrixType* inputMatrix, int w,int h,double scale){
+void matrix2pixel::drawMatrix(inputMatrixType* inputMatrix, int w,int h,double scale){
 	drawMatrix<colorStyle,p2data<inputMatrixType>>(p2data<inputMatrixType>{inputMatrix,w},w,h,scale);
 }
 

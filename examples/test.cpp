@@ -1,4 +1,4 @@
-#include "../m2p/m2p.hpp"
+#include "../m2p.hpp"
 
 #include "Eigen/Core"
 
